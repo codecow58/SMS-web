@@ -7,6 +7,7 @@ import { UserContextProvider } from '../../context';
 
 import Dashboard from "../dashboard";
 import Home from "../home";
+import ProfileSettings from '../profile-settings';
 
 const RoutesRoot: React.FunctionComponent = () => {
     return (
@@ -27,6 +28,14 @@ const RoutesRoot: React.FunctionComponent = () => {
               element={
                 <RequireAuth>
                   <Dashboard />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="profile-settings"
+              element={
+                <RequireAuth>
+                  <ProfileSettings />
                 </RequireAuth>
               }
             />

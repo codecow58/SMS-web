@@ -19,16 +19,16 @@ const Header: React.FunctionComponent = () => {
 
   const { user , logOutUser } = useUserContext();
 
-  const {displayName, photoUrl} = user;
+
+  const { displayName, photoURL } = user;
+  console.log(user);
 
   const examplePersona: IPersonaSharedProps = {
-    imageUrl: photoUrl,
-    imageInitials: displayName ? displayName.charAt(0): "S",
+    imageUrl: photoURL,
+    imageInitials: displayName ? displayName.charAt(0) : "S",
     text: displayName,
   };
   const navigate = useNavigate();
-
-  console.log(user);
   return (
     <Stack horizontal >
       <Persona

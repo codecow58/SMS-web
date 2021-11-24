@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Form, Field } from "react-final-form";
-import { DefaultButton, IIconProps } from "@fluentui/react";
+import { PrimaryButton, IIconProps } from "@fluentui/react";
 import { TextField } from "@fluentui/react/lib/TextField";
 import Home from '../../home';
 import { useUserContext } from '../../../context/auth/userContext';
+import Loading from '../../common/loading';
 
 
 
@@ -14,7 +15,7 @@ const userIconProps = { iconName: "Mail" };
 
 
 const LoginWrapper = () => {
-    const { loginUser } = useUserContext(); 
+    const { loading, loginUser , error} = useUserContext(); 
 
     const onSubmit = ({ email, password }: any) => {
       console.log(email, password);
@@ -33,8 +34,17 @@ const LoginWrapper = () => {
         backgroundColor: "#edebe9",
       }}
     >
-      <h3>School Management Software</h3>
+      {loading&& <Loading/>}
+      <h3
+        style={{
+          fontFamily: "Segoe UI",
+        }}
+      >
+        School Management Software
+      </h3>
+
       <div>
+        {error && <p>{error}</p>}
         <Form
           onSubmit={onSubmit}
           render={({ handleSubmit }) => (
@@ -68,7 +78,7 @@ const LoginWrapper = () => {
                 )}
               </Field>
               <br />
-              <DefaultButton
+              <PrimaryButton
                 text=" Log In "
                 type="submit"
                 iconProps={loginIcon}
@@ -85,8 +95,6 @@ const LoginWrapper = () => {
 
 const Login: React.FunctionComponent = () => {
   const {user} = useUserContext(); 
-
-
   if(user){
     return <Home/>
   }else {

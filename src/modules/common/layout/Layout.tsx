@@ -4,7 +4,12 @@ import Header from "../header";
 import GoBack from "../goback";
 const Layout: React.FunctionComponent = ({ children }) => {
   return (
-    <div>
+    <div
+      style={{
+        minHeight: '100vh',
+        backgroundColor: "#edebe9",
+      }}
+    >
       <Stack horizontal horizontalAlign="start">
         <GoBack />
       </Stack>
