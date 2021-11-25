@@ -5,10 +5,8 @@ import GoBack from '../common/goback';
 import RequireAuth from './RequiredAuth';
 import { UserContextProvider } from '../../context';
 
-import Dashboard from "../dashboard";
+import Dashboard from "../schools-management/dashboard";
 import ProfileSettings from '../profile-settings';
-import StudentManagement from '../student-management';
-import EmployeeManagement, { CreateEmployeeRole } from '../employee-management';
 
 const RoutesRoot: React.FunctionComponent = () => {
     return (
@@ -29,30 +27,6 @@ const RoutesRoot: React.FunctionComponent = () => {
               element={
                 <RequireAuth>
                   <ProfileSettings />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="student-management"
-              element={
-                <RequireAuth>
-                  <StudentManagement />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="employee-management"
-              element={
-                <RequireAuth>
-                  <EmployeeManagement />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="create-employee-role"
-              element={
-                <RequireAuth>
-                  <CreateEmployeeRole />
                 </RequireAuth>
               }
             />

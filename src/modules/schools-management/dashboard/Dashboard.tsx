@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Layout from '../common/layout';
+import Layout from '../../common/layout';
 
 
 const Dashboard: React.FunctionComponent = () => {

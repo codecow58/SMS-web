@@ -9,7 +9,7 @@ import {
 import { TextField } from "@fluentui/react/lib/TextField";
 import { useUserContext } from '../../../context/auth/userContext';
 import Loading from '../../common/loading';
-import Dashboard from '../../dashboard';
+import Dashboard from '../../schools-management/dashboard';
 
 
 
