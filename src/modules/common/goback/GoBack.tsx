@@ -8,9 +8,15 @@ const GoBack: React.FunctionComponent = () => {
 
   return (
     <IconButton
-      onClick={() => navigate("/home")}
-      iconProps={{ iconName: "Home" }}
+      onClick={() => navigate("/dashboard")}
+      iconProps={{
+        iconName: "Street",
+        styles: { root: { fontSize: 38, padding:100} },
+      }}
+
+      style={{margin:20}}
     />
+    
   );
 };
 

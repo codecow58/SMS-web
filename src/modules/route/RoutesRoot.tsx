@@ -6,8 +6,9 @@ import RequireAuth from './RequiredAuth';
 import { UserContextProvider } from '../../context';
 
 import Dashboard from "../dashboard";
-import Home from "../home";
 import ProfileSettings from '../profile-settings';
+import StudentManagement from '../student-management';
+import EmployeeManagement, { CreateEmployeeRole } from '../employee-management';
 
 const RoutesRoot: React.FunctionComponent = () => {
     return (
@@ -15,14 +16,6 @@ const RoutesRoot: React.FunctionComponent = () => {
         <UserContextProvider>
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route
-              path="home"
-              element={
-                <RequireAuth>
-                  <Home />
-                </RequireAuth>
-              }
-            />
             <Route
               path="dashboard"
               element={
@@ -36,6 +29,30 @@ const RoutesRoot: React.FunctionComponent = () => {
               element={
                 <RequireAuth>
                   <ProfileSettings />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="student-management"
+              element={
+                <RequireAuth>
+                  <StudentManagement />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="employee-management"
+              element={
+                <RequireAuth>
+                  <EmployeeManagement />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="create-employee-role"
+              element={
+                <RequireAuth>
+                  <CreateEmployeeRole />
                 </RequireAuth>
               }
             />

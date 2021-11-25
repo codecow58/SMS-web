@@ -21,7 +21,6 @@ const Header: React.FunctionComponent = () => {
 
 
   const { displayName, photoURL } = user;
-  console.log(user);
 
   const examplePersona: IPersonaSharedProps = {
     imageUrl: photoURL,

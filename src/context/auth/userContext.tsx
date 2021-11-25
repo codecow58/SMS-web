@@ -29,20 +29,25 @@ const UserContextProvider = ({children}:any) => {
     React.useEffect(()=>{
         setLoading(true);
         const unsubcribe = onAuthStateChanged(auth, (userData)=>{
-            userData ? setUser(userData as any) : setUser(null);
-            setError("");
-            setLoading(false);
+            if(userData){
+              setUser(userData as any)
+              setError("");
+              setLoading(false);
+            } else{
+              setUser(null);
+              setLoading(false);
+            }
         });
 
         return unsubcribe;
-    } , []);
+    } , [navigate]);
 
     const registerUser = (email:any,password:any) => {
         setLoading(true);
 
         createUserWithEmailAndPassword(auth,email,password)
             .then((_)=>{
-                navigate('/home')
+                navigate('/dashboard')
             })
             .catch(({message})=>{
                 setError(message as any)
@@ -55,7 +60,7 @@ const UserContextProvider = ({children}:any) => {
         setLoading(true);
         signInWithEmailAndPassword(auth, email, password)
           .then((_) => {
-            navigate("/home");
+            navigate("/dashboard");
           })
           .catch(({ message }) => {
             setError(message as any);

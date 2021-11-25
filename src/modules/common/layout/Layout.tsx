@@ -2,11 +2,15 @@ import React from "react";
 import { Stack } from "@fluentui/react/lib/Stack";
 import Header from "../header";
 import GoBack from "../goback";
+import Sidebar from "../sidebar";
+import { getTheme } from "@fluentui/react";
+
+const theme = getTheme();
 const Layout: React.FunctionComponent = ({ children }) => {
   return (
     <div
       style={{
-        minHeight: '100vh',
+        minHeight: "100vh",
         backgroundColor: "#edebe9",
       }}
     >
@@ -16,11 +20,24 @@ const Layout: React.FunctionComponent = ({ children }) => {
       <Stack
         horizontal
         horizontalAlign="end"
-        styles={{ root: { marginTop: "-30px" } }}
+        styles={{ root: { marginTop: "-55px" } }}
       >
         <Header />
       </Stack>
+      <Stack horizontal>
+        <Sidebar />
+        <div
+          style={{
+            boxShadow: theme.effects.elevation8,
+            flexGrow: 2,
+            backgroundColor: "white",
+            maxWidth: "75vw",
+            padding: 20,
+          }}
+        >
       {children}
+        </div>
+      </Stack>
     </div>
   );
 };

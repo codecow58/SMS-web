@@ -4,10 +4,10 @@ import Layout from '../common/layout';
 
 const Dashboard: React.FunctionComponent = () => {
     return (
-        <Layout>
-            Dashboard
-        </Layout>
-    )
+      <Layout>
+        dashboard
+      </Layout>
+    );
 }
 
 export default Dashboard;
