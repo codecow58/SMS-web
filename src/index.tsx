@@ -1,15 +1,30 @@
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './App';
 import { mergeStyles } from '@fluentui/react';
 import reportWebVitals from './reportWebVitals';
 
+
 // Inject some global styles
 mergeStyles({
-  ':global(body,html,#root)': {
+  ":global(body,html,#root)": {
     margin: 0,
     padding: 0,
-    height: '100vh',
+    height: "100vh",
+  },
+  ":global(::-webkit-scrollbar)": {
+    width: 5,
+  },
+
+  ":global(::-webkit-scrollbar-track)": {
+    background: "#f1f1f1",
+  },
+  ":global(::-webkit-scrollbar-thumb)": {
+    background: "#888",
+    borderRadius:10,
+  },
+  ":global(::-webkit-scrollbar-thumb):hover": {
+    background: "#8a00d4",
   },
 });
 
