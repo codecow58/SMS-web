@@ -5,6 +5,7 @@
   "dependencies": {
     "@fluentui/font-icons-mdl2": "^8.1.17",
     "@fluentui/react": "^8.0.0",
+    "@fluentui/react-hooks": "^8.3.7",
     "@fluentui/react-icons-mdl2": "^1.2.8",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",

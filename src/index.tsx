@@ -11,21 +11,7 @@ mergeStyles({
     margin: 0,
     padding: 0,
     height: "100vh",
-  },
-  ":global(::-webkit-scrollbar)": {
-    width: 5,
-  },
-
-  ":global(::-webkit-scrollbar-track)": {
-    background: "#f1f1f1",
-  },
-  ":global(::-webkit-scrollbar-thumb)": {
-    background: "#888",
-    borderRadius:10,
-  },
-  ":global(::-webkit-scrollbar-thumb):hover": {
-    background: "#8a00d4",
-  },
+  }
 });
 
 ReactDOM.render(<App />, document.getElementById('root'));

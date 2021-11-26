@@ -234,7 +234,7 @@ const navLinkGroups: INavLinkGroup[] = [
           },
           {
             name: "Roles",
-            url: "http://example.com",
+            url: "/school-administrator/roles",
             target: "_blank",
             key: "key5-3",
           },
@@ -447,7 +447,7 @@ const Sidebar: React.FunctionComponent = () => {
     ev?.preventDefault();
     // console.log(item);
     
-    // navigate(item?.url as any);
+    navigate(item?.url as any);
   }
 
   return (
@@ -455,7 +455,6 @@ const Sidebar: React.FunctionComponent = () => {
       onLinkClick={_onLinkClick}
       styles={navStyles}
       groups={navLinkGroups}
-      onLinkExpandClick = {console.log}
     />
   );
 };
