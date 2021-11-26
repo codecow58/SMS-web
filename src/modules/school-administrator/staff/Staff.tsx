@@ -5,13 +5,15 @@ import Layout from '../../common/layout';
 
 const Staff: React.FunctionComponent = () => {
     return (
-        <Layout>
-            Staff
-            <Stack horizontalAlign='end'>
-                <PrimaryButton text='Create Staff' iconProps={{iconName:'Add'}}/>
-            </Stack>
-        </Layout>
-    )
+      <Layout>
+        <Stack horizontalAlign="center">
+          <h1>Staff</h1>
+        </Stack>
+        <Stack horizontalAlign="end">
+          <PrimaryButton text="Create New Staff" iconProps={{ iconName: "Add" }} />
+        </Stack>
+      </Layout>
+    );
 }
 
 export default Staff;

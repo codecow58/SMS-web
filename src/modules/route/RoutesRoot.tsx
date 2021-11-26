@@ -5,7 +5,7 @@ import GoBack from '../common/goback';
 import RequireAuth from './RequiredAuth';
 import { UserContextProvider } from '../../context';
 
-import Dashboard from "../schools-management/dashboard";
+import {CreateSchool, Dashboard, School} from "../schools-management";
 import ProfileSettings from '../profile-settings';
 import { Roles, Staff } from '../school-administrator';
 
@@ -36,6 +36,24 @@ const RoutesRoot: React.FunctionComponent = () => {
               element={
                 <RequireAuth>
                   <Roles />
+                </RequireAuth>
+              }
+            />
+
+            <Route
+              path="/schools-management/school"
+              element={
+                <RequireAuth>
+                  <School />
+                </RequireAuth>
+              }
+            />
+
+            <Route
+              path="/schools-management/school/create"
+              element={
+                <RequireAuth>
+                  <CreateSchool />
                 </RequireAuth>
               }
             />

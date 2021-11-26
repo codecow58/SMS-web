@@ -9,9 +9,8 @@ import {
 import { TextField } from "@fluentui/react/lib/TextField";
 import { useUserContext } from '../../../context/auth/userContext';
 import Loading from '../../common/loading';
-import Dashboard from '../../schools-management/dashboard';
 
-
+import { Dashboard } from '../../schools-management';
 
 
 const required = (value: any) => (value ? undefined : "Required");

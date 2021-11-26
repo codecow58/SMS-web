@@ -88,62 +88,66 @@ const Roles: React.FunctionComponent = () => {
 
     return (
       <Layout>
+        <Stack horizontalAlign="center">
+          <h1>Roles</h1>
+        </Stack>
         {loading && <Loading />}
         <br />
-        <Dialog
-          hidden={hideDialog}
-          onDismiss={() => {
-            toggleHideDialog();
-            setSelectedItem({});
-          }}
-          dialogContentProps={dialogContentProps}
-        >
-          <TextField
-            label="Role Name"
-            defaultValue={selectedItem["Role Name"]}
-            onChange={(_, v) => setRoleName(v as any)}
-          />
-          <Dropdown
-            label="Role Status"
-            options={[
-              { key: "active", text: "Active" },
-              { key: "inactive", text: "Inactive" },
-            ]}
-            defaultSelectedKey={
-              selectedItem["Status"] === true ? "active" : "inactive"
-            }
-            onChange={(_, { key }: any) => {
-              debugger;
-              key === "active" ? setRoleStatus(true) : setRoleStatus(false);
-            }}
-          />
-          <DialogFooter>
-            <PrimaryButton
-              onClick={() => {
-                const updateRole = async () => {
-                  const roleRef = doc(db, "roles", selectedItem["No"]);
-                  try {
-                    await updateDoc(roleRef, {
-                      roleName,
-                      status: roleStatus,
-                    });
-                  } catch (error) {
-                    console.log(error);
-                  }
-                };
-                updateRole();
-                toggleHideDialog();
-                navigate("/");
-                setTimeout(() => navigate("/school-administrator/roles"), 0);
-              }}
-              text="Update"
-            />
-            <DefaultButton onClick={toggleHideDialog} text="Cancel" />
-          </DialogFooter>
-        </Dialog>
+
         <Stack>
+          <Dialog
+            hidden={hideDialog}
+            onDismiss={() => {
+              toggleHideDialog();
+              setSelectedItem({});
+            }}
+            dialogContentProps={dialogContentProps}
+          >
+            <TextField
+              label="Role Name"
+              defaultValue={selectedItem["Role Name"]}
+              onChange={(_, v) => setRoleName(v as any)}
+            />
+            <Dropdown
+              label="Role Status"
+              options={[
+                { key: "active", text: "Active" },
+                { key: "inactive", text: "Inactive" },
+              ]}
+              defaultSelectedKey={
+                selectedItem["Status"] === true ? "active" : "inactive"
+              }
+              onChange={(_, { key }: any) => {
+                debugger;
+                key === "active" ? setRoleStatus(true) : setRoleStatus(false);
+              }}
+            />
+            <DialogFooter>
+              <PrimaryButton
+                onClick={() => {
+                  const updateRole = async () => {
+                    const roleRef = doc(db, "roles", selectedItem["No"]);
+                    try {
+                      await updateDoc(roleRef, {
+                        roleName,
+                        status: roleStatus,
+                      });
+                    } catch (error) {
+                      console.log(error);
+                    }
+                  };
+                  updateRole();
+                  toggleHideDialog();
+                  navigate("/");
+                  setTimeout(() => navigate("/school-administrator/roles"), 0);
+                }}
+                text="Update"
+              />
+              <DefaultButton onClick={toggleHideDialog} text="Cancel" />
+            </DialogFooter>
+          </Dialog>
           <DetailsList
-            styles={{ root: { overflow: "scroll" ,maxHeight:'80vh'} }}
+            styles={{ root: { overflow: "scroll", maxHeight: "80vh" } }}
             items={roles}
             disableSelectionZone={true}
             onShouldVirtualize={() => true}

@@ -36,7 +36,7 @@ const navLinkGroups: INavLinkGroup[] = [
           },
           {
             name: "Schools",
-            url: "http://example.com",
+            url: "/schools-management/school",
             target: "_blank",
             key: "key1-2",
           },
