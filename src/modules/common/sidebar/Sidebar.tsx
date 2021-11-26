@@ -240,7 +240,7 @@ const navLinkGroups: INavLinkGroup[] = [
           },
           {
             name: "Staff list",
-            url: "http://example.com",
+            url: "/school-administrator/staff",
             target: "_blank",
             key: "key5-4",
           },

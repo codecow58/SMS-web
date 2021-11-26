@@ -7,7 +7,7 @@ import { UserContextProvider } from '../../context';
 
 import Dashboard from "../schools-management/dashboard";
 import ProfileSettings from '../profile-settings';
-import { Roles } from '../school-administrator';
+import { Roles, Staff } from '../school-administrator';
 
 const RoutesRoot: React.FunctionComponent = () => {
     return (
@@ -36,6 +36,14 @@ const RoutesRoot: React.FunctionComponent = () => {
               element={
                 <RequireAuth>
                   <Roles />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="school-administrator/staff"
+              element={
+                <RequireAuth>
+                  <Staff />
                 </RequireAuth>
               }
             />
