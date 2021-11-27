@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useLocation, Navigate } from "react-router-dom";
-import { useUserContext } from '../../context/auth/userContext';
+import { useUserContext } from '../../../context/auth/userContext';
 
 const RequireAuth: React.FunctionComponent = ({children}: any) => {
 

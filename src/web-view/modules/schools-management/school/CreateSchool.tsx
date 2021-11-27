@@ -2,8 +2,8 @@ import { ChoiceGroup, Icon, MessageBar, MessageBarType, PrimaryButton, Separator
 import { useBoolean } from "@fluentui/react-hooks";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from "../../../context/auth/userContext";
-import { db } from "../../../firebase";
+import { useUserContext } from "../../../../context/auth/userContext";
+import { db } from "../../../../firebase";
 import Layout from "../../common/layout";
 import { collection, addDoc } from "firebase/firestore";
 

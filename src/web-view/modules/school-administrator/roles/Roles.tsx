@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../../common/layout';
 import { collection, getDocs, updateDoc,doc } from "firebase/firestore"; 
-import { db } from '../../../firebase';
+import { db } from '../../../../firebase';
 
 import {  useBoolean } from "@fluentui/react-hooks";
 import Loading from '../../common/loading';

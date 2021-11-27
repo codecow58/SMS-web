@@ -7,7 +7,7 @@ import {
   MessageBarType,
 } from "@fluentui/react";
 import { TextField } from "@fluentui/react/lib/TextField";
-import { useUserContext } from '../../../context/auth/userContext';
+import { useUserContext } from '../../../../context/auth/userContext';
 import Loading from '../../common/loading';
 
 import { Dashboard } from '../../schools-management';
@@ -101,7 +101,6 @@ const LoginWrapper = () => {
                 type="submit"
                 iconProps={loginIcon}
               />
-              ;
             </form>
           )}
         />

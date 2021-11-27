@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Login } from '../auth';
 import GoBack from '../common/goback';
 import RequireAuth from './RequiredAuth';
-import { UserContextProvider } from '../../context';
+import { UserContextProvider } from '../../../context';
 
 import {CreateSchool, Dashboard, School} from "../schools-management";
 import ProfileSettings from '../profile-settings';

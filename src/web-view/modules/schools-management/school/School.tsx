@@ -1,11 +1,11 @@
 /* eslint-disable no-useless-computed-key */
-import { CheckboxVisibility, ConstrainMode, DetailsList, DetailsListLayoutMode, Icon, IconButton, PrimaryButton, Separator, Stack } from '@fluentui/react';
+import {  DetailsList, DetailsListLayoutMode, Icon, IconButton, PrimaryButton, Separator, Stack } from '@fluentui/react';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUserContext } from '../../../context/auth/userContext';
+import { useUserContext } from '../../../../context/auth/userContext';
 import Layout from '../../common/layout';
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from '../../../firebase';
+import { db } from '../../../../firebase';
 
 
 const iconStyles = {

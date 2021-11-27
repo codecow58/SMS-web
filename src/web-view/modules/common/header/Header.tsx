@@ -8,7 +8,7 @@ import {
 import { Stack } from "@fluentui/react/lib/Stack";
 import { IconButton } from "@fluentui/react";
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from "../../../context/auth/userContext";
+import { useUserContext } from "../../../../context/auth/userContext";
 
 const personaStyles: Partial<IPersonaStyles> = {
   root: { margin: "-40 0 10px 0" },
