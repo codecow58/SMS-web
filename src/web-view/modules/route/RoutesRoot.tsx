@@ -3,11 +3,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Login } from '../auth';
 import GoBack from '../common/goback';
 import RequireAuth from './RequiredAuth';
-import { UserContextProvider } from '../../../context';
 
 import {CreateSchool, Dashboard, School} from "../schools-management";
 import ProfileSettings from '../profile-settings';
 import { Roles, Staff } from '../school-administrator';
+import UserContextProvider from '../../../context/auth/userContext';
+import { SchoolDashboard } from '../school-management';
 
 const RoutesRoot: React.FunctionComponent = () => {
     return (
@@ -39,7 +40,14 @@ const RoutesRoot: React.FunctionComponent = () => {
                 </RequireAuth>
               }
             />
-
+            <Route
+              path="school-administrator/staff"
+              element={
+                <RequireAuth>
+                  <Staff />
+                </RequireAuth>
+              }
+            />
             <Route
               path="/schools-management/school"
               element={
@@ -57,14 +65,16 @@ const RoutesRoot: React.FunctionComponent = () => {
                 </RequireAuth>
               }
             />
+
             <Route
-              path="school-administrator/staff"
+              path="/school-management/dashboard/:id"
               element={
                 <RequireAuth>
-                  <Staff />
+                  <SchoolDashboard />
                 </RequireAuth>
               }
             />
+
             <Route path="*" element={<GoBack />} />
           </Routes>
         </UserContextProvider>

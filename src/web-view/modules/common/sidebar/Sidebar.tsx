@@ -22,7 +22,7 @@ const navLinkGroups: INavLinkGroup[] = [
     links: [
       {
         name: "Schools Management",
-        url: "/create-employee-role",
+        url: "/dashboard",
         key: "key1",
         target: "_blank",
         expandAriaLabel: "Expand School Management",
@@ -30,7 +30,7 @@ const navLinkGroups: INavLinkGroup[] = [
         links: [
           {
             name: "Dashboard",
-            url: "http://example.com",
+            url: "/dashboard",
             target: "_blank",
             key: "key1-1",
           },
@@ -62,22 +62,16 @@ const navLinkGroups: INavLinkGroup[] = [
         collapseAriaLabel: "Collapse Parent link 2",
         links: [
           {
-            name: "Dashboard",
+            name: "Inquiries",
             url: "http://example.com",
             target: "_blank",
             key: "key2-1",
           },
           {
-            name: "Inquiries",
-            url: "http://example.com",
-            target: "_blank",
-            key: "key2-2",
-          },
-          {
             name: "Settings",
             url: "http://example.com",
             target: "_blank",
-            key: "key2-3",
+            key: "key2-2",
           },
         ],
       },

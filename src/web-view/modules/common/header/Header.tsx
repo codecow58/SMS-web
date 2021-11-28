@@ -9,6 +9,8 @@ import { Stack } from "@fluentui/react/lib/Stack";
 import { IconButton } from "@fluentui/react";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../../../context/auth/userContext";
+import { useSignOut } from "../../../../hooks/auth";
+import { auth } from "../../../../firebase";
 
 const personaStyles: Partial<IPersonaStyles> = {
   root: { margin: "-40 0 10px 0" },
@@ -17,7 +19,10 @@ const personaStyles: Partial<IPersonaStyles> = {
 const Header: React.FunctionComponent = () => {
 
 
-  const { user , logOutUser } = useUserContext();
+  const { user  } = useUserContext();
+  const [logoutSuccessMsg , setLogoutSuccessMsg] = React.useState("");
+  const [logoutErrorMsg, setLogoutErrorMsg] = React.useState("");
+  const { signOut } = useSignOut(auth, setLogoutSuccessMsg, setLogoutErrorMsg);
 
 
   const { displayName, photoURL } = user;
@@ -50,7 +55,9 @@ const Header: React.FunctionComponent = () => {
               key: "logout",
               text: "Logout",
               onClick: () => {
-                logOutUser()
+                signOut();
+                console.log(logoutSuccessMsg, logoutErrorMsg);
+                navigate('/');
               },
               iconProps: { iconName: "Lock" },
             },

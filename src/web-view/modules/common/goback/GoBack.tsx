@@ -11,7 +11,7 @@ const GoBack: React.FunctionComponent = () => {
       onClick={() => navigate("/dashboard")}
       iconProps={{
         iconName: "Street",
-        styles: { root: { fontSize: 38, padding:100} },
+        styles: { root: { fontSize: 38} },
       }}
 
       style={{margin:20}}
