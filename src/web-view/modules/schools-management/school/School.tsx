@@ -6,6 +6,8 @@ import { useUserContext } from '../../../../context/auth/userContext';
 import Layout from '../../common/layout';
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from '../../../../firebase';
+import Loading from '../../common/loading';
+import { useSetTimeout } from '@fluentui/react-hooks';
 
 
 const iconStyles = {
@@ -23,37 +25,56 @@ const School : React.FunctionComponent = ()=>{
     const navigate = useNavigate();
 
     const [detailsListItems, setDetailsListItems] = React.useState([] as any);
+    const [loading,setLoading] = React.useState(()=>false);
+    const [error, setError] = React.useState(null as any);
+    const { setTimeout, clearTimeout } = useSetTimeout();
+
     React.useEffect(()=>{
-        const q = query(collection(db, "schools"), where("userID", "==", user.uid));
-        const getSchools = async () => {
-          const querySnapshot = await getDocs(q);
+     
+      setLoading(true);
+       const id = setTimeout(() => {
+         try {
+           const q = query(
+             collection(db, "schools"),
+             where("userID", "==", user.uid)
+           );
+           const getSchools = async () => {
+             const querySnapshot = await getDocs(q);
 
-          const qData:any[] = [];
-          querySnapshot.forEach((doc: any) => {
-            // doc.data() is never undefined for query doc snapshots
+             const qData: any[] = [];
+             querySnapshot.forEach((doc: any) => {
+               // doc.data() is never undefined for query doc snapshots
 
-            const data = doc.data();
-            const detailsListObj = {
-              No: doc.id,
-              ["School Name"]:data.schoolName,
-              Email: data.email,
-              ["Phone Number"]:data.phoneNumber,
-              Address: data.address,
-              City:data.city,
-              State:data.state,
-              Country: data.country,
-              Status:data.status,
-              CreatedAt: data.createdAt.toDate().toDateString(),
-              Edit: "",
-              Delete: "",
-            };
+               const data = doc.data();
+               const detailsListObj = {
+                 No: doc.id,
+                 ["School Name"]: data.schoolName,
+                 Email: data.email,
+                 ["Phone Number"]: data.phoneNumber,
+                 Address: data.address,
+                 City: data.city,
+                 State: data.state,
+                 Country: data.country,
+                 Status: data.status,
+                 CreatedAt: data.createdAt.toDate().toDateString(),
+                 Edit: "",
+                 Delete: "",
+               };
 
-            qData.push(detailsListObj)
-          });
+               qData.push(detailsListObj);
+             });
 
-          setDetailsListItems(qData);
-        }
-        getSchools();
+             setDetailsListItems(qData);
+           };
+           getSchools();
+         } catch (error) {
+           setError(error);
+         } finally {
+           setLoading(false);
+         }
+       }, 1000);
+        
+      return () => clearTimeout(id);
     },[])
 
 
@@ -88,6 +109,7 @@ const School : React.FunctionComponent = ()=>{
       <Layout>
         <Stack horizontalAlign="center">
           <h1>Schools</h1>
+        {loading && <Loading/>}
         </Stack>
         <Separator>
           <Icon iconName="Clock" styles={iconStyles} />

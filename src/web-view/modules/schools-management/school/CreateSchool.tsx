@@ -45,7 +45,7 @@ const CreateSchool: React.FunctionComponent = () => {
     const [showSuccessMessage, { toggle: toggleShowSuccessMessage }] =
       useBoolean(false);
 
-    const [schoolName , setSchollName] = useState("" as any);
+    const [schoolName , setSchoolName] = useState("" as any);
     const [phoneNumber, setPhoneNumber] = useState(null as any);
     const [email, setEmail] = useState("" as any);
     const [address, setAddress] = useState("" as any);
@@ -91,7 +91,7 @@ const CreateSchool: React.FunctionComponent = () => {
             dismissButtonAriaLabel="Close"
             styles={{ root: { maxWidth: "30vw" } }}
           >
-           successfully created.
+            successfully created.
           </MessageBar>
         )}
       </Stack>
@@ -101,7 +101,7 @@ const CreateSchool: React.FunctionComponent = () => {
             label="School Name :"
             placeholder="RKMH School"
             required
-            onChange={(_, v) => setSchollName(v)}
+            onChange={(_, v) => setSchoolName(v)}
           />
           <TextField
             label="Phone Number :"
@@ -181,10 +181,9 @@ const CreateSchool: React.FunctionComponent = () => {
             ) {
               toggleShowMessage();
             } else {
-
               const addSchool = async () => {
                 try {
-                   await addDoc(collection(db, "schools"), {
+                  await addDoc(collection(db, "schools"), {
                     schoolName,
                     email,
                     phoneNumber,
@@ -202,7 +201,6 @@ const CreateSchool: React.FunctionComponent = () => {
                   console.log(error);
                 }
               };
-
               addSchool();
             }
           }}

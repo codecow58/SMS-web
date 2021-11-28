@@ -42,13 +42,13 @@ const navLinkGroups: INavLinkGroup[] = [
           },
           {
             name: "Classes",
-            url: "http://example.com",
+            url: "/schools-management/classes",
             target: "_blank",
             key: "key1-3",
           },
           {
             name: "Sessions",
-            url: "http://example.com",
+            url: "/schools-management/sessions",
             target: "_blank",
             key: "key1-4",
           },

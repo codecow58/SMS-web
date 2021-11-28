@@ -1,7 +1,6 @@
-import {  Icon, PrimaryButton, Separator, Stack } from '@fluentui/react';
-import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
-import Layout from '../../common/layout';
+import { Icon, PrimaryButton, Separator, Stack } from '@fluentui/react';
+import * as React from 'react'
+import Layout from '../../common/layout'
 
 
 const iconStyles = {
@@ -12,26 +11,23 @@ const iconStyles = {
   },
 };
 
-const Staff: React.FunctionComponent = () => {
+// eslint-disable-next-line import/no-anonymous-default-export
+export default () => {
 
-    const navigate = useNavigate();
     return (
       <Layout>
         <Stack horizontalAlign="center">
-          <h1>Staff</h1>
+          <h1>Classes</h1>
         </Stack>
         <Separator>
           <Icon iconName="Clock" styles={iconStyles} />
         </Separator>
         <Stack horizontalAlign="end">
           <PrimaryButton
-            text="Create New Staff"
+            text="Create Class"
             iconProps={{ iconName: "Add" }}
-            onClick={() => navigate("/school-administrator/staff/create")}
           />
         </Stack>
       </Layout>
     );
 }
-
-export default Staff;
