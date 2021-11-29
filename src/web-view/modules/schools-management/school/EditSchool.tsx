@@ -1,11 +1,21 @@
-import { ChoiceGroup, Icon, MessageBar, MessageBarType, PrimaryButton, Separator, Stack, TextField } from "@fluentui/react";
-import { useBoolean } from "@fluentui/react-hooks";
+import {
+  ChoiceGroup,
+  Icon,
+  MessageBar,
+  MessageBarType,
+  PrimaryButton,
+  Separator,
+  Stack,
+  TextField,
+} from "@fluentui/react";
+import { useBoolean, useSetTimeout } from "@fluentui/react-hooks";
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useUserContext } from "../../../../context/auth/userContext";
 import { db } from "../../../../firebase";
 import Layout from "../../common/layout";
-import { collection, addDoc } from "firebase/firestore";
+import {  doc, getDoc, updateDoc } from "firebase/firestore";
+import Loading from "../../common/loading";
 
 const iconStyles = {
   root: {
@@ -24,41 +34,79 @@ const rowProps = {
   tokens: { childrenGap: 130 },
 };
 
-  const options = [
-    { key: "active", text: "Active", iconProps: { iconName: "Emoji" } },
-    {
-      key: "inactive",
-      text: "Inactive",
-      iconProps: { iconName: "IncidentTriangle" },
-    },
-  ];
+const options = [
+  { key: "active", text: "Active", iconProps: { iconName: "Emoji" } },
+  {
+    key: "inactive",
+    text: "Inactive",
+    iconProps: { iconName: "IncidentTriangle" },
+  },
+];
 
+// eslint-disable-next-line import/no-anonymous-default-export
+export default () => {
+  const navigate = useNavigate();
+  const { user } = useUserContext();
+  const { useState } = React;
 
+  const [showMessageBar, { toggle: toggleShowMessage }] = useBoolean(false);
+  const [showSuccessMessage, { toggle: toggleShowSuccessMessage }] =
+    useBoolean(false);
 
-const CreateSchool: React.FunctionComponent = () => {
-    
-    const navigate = useNavigate();
-    const {user} = useUserContext();
-    const {useState} = React;
+  const [schoolName, setSchoolName] = useState("" as any);
+  const [phoneNumber, setPhoneNumber] = useState(null as any);
+  const [email, setEmail] = useState("" as any);
+  const [address, setAddress] = useState("" as any);
+  const [city, setCity] = useState("" as any);
+  const [pinCode, setPinCode] = useState(null as any);
+  const [state, setState] = useState("" as any);
+  const [country, setCountry] = useState("" as any);
+  const [status, setStatus] = useState(true);
+ 
+  const [loading, setLoading] = useState(false);
 
-    const [showMessageBar , {toggle:toggleShowMessage}] = useBoolean(false)
-    const [showSuccessMessage, { toggle: toggleShowSuccessMessage }] =
-      useBoolean(false);
+  const { setTimeout , clearTimeout} = useSetTimeout();
 
-    const [schoolName , setSchoolName] = useState("" as any);
-    const [phoneNumber, setPhoneNumber] = useState(null as any);
-    const [email, setEmail] = useState("" as any);
-    const [address, setAddress] = useState("" as any);
-    const [city, setCity] = useState("" as any);
-    const [pinCode, setPinCode] = useState(null as any);
-    const [state, setState] = useState("" as any);
-    const [country, setCountry] = useState("" as any);
-    const [status, setStatus] = useState(true);
+  const { docId } = useParams();
   
+  React.useEffect(()=>{
+    setLoading(true);
+    const id = setTimeout(async () => {
+        try {
+           const docRef = doc(db, "schools", `${docId}`);
+           const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                debugger
+                setSchoolName(data.schoolName);
+                setPhoneNumber(data.phoneNumber);
+                setEmail(data.email);
+                setAddress(data.address);
+                setCity(data.city);
+                setPinCode(data.pinCode);
+                setState(data.state);
+                setCountry(data.country);
+                setStatus(data.status);
+            } else {
+              // doc.data() will be undefined in this case
+              console.log("No such document!");
+            }
+        } catch (error) {
+            debugger
+        }finally{
+            setLoading(false)
+        }
+    },1000);
+
+    return () => clearTimeout(id)
+  },[]);
+
   return (
     <Layout>
+      {loading && <Loading />}
       <Stack horizontalAlign="center">
-        <h1>Create School</h1>
+        <h1>Edit School</h1>
       </Stack>
       <Separator>
         <Icon iconName="Clock" styles={iconStyles} />
@@ -99,9 +147,9 @@ const CreateSchool: React.FunctionComponent = () => {
         <Stack {...columnProps}>
           <TextField
             label="School Name :"
-            placeholder="RKMH School"
             required
             onChange={(_, v) => setSchoolName(v)}
+            value={schoolName}
           />
           <TextField
             label="Phone Number :"
@@ -109,6 +157,7 @@ const CreateSchool: React.FunctionComponent = () => {
             type="number"
             required
             onChange={(_, v) => setPhoneNumber(v)}
+            value={phoneNumber}
           />
           <TextField
             label="Email :"
@@ -116,6 +165,7 @@ const CreateSchool: React.FunctionComponent = () => {
             placeholder="test@test.com"
             required
             onChange={(_, v) => setEmail(v)}
+            value={email}
           />
           <TextField
             label="Address :"
@@ -124,12 +174,14 @@ const CreateSchool: React.FunctionComponent = () => {
             autoAdjustHeight
             required
             onChange={(_, v) => setAddress(v)}
+            value={address}
           />
           <TextField
             label="City :"
             placeholder="Chennai"
             required
             onChange={(_, v) => setCity(v)}
+            value={city}
           />
           <TextField
             label="Pin Code:"
@@ -137,6 +189,7 @@ const CreateSchool: React.FunctionComponent = () => {
             type="number"
             required
             onChange={(_, v) => setPinCode(v)}
+            value={pinCode}
           />
         </Stack>
         <Stack {...columnProps}>
@@ -145,12 +198,14 @@ const CreateSchool: React.FunctionComponent = () => {
             placeholder="Tamil Nadu"
             required
             onChange={(_, v) => setState(v)}
+            value={state}
           />
           <TextField
             label="Country"
             placeholder="India"
             required
             onChange={(_, v) => setCountry(v)}
+            value={country}
           />
           <ChoiceGroup
             label="Status"
@@ -160,14 +215,15 @@ const CreateSchool: React.FunctionComponent = () => {
             onChange={(_, { key }: any) => {
               key === "active" ? setStatus(true) : setStatus(false);
             }}
+            value={status ? "active" : "inactive"}
           />
         </Stack>
       </Stack>
       <br />
       <Stack horizontalAlign="center">
         <PrimaryButton
-          text="Create New Shool"
-          iconProps={{ iconName: "Add" }}
+          text="Update Shool"
+          iconProps={{ iconName: "Upload" }}
           onClick={(_) => {
             if (
               schoolName === "" ||
@@ -181,9 +237,11 @@ const CreateSchool: React.FunctionComponent = () => {
             ) {
               toggleShowMessage();
             } else {
-              const addSchool = async () => {
+              const updateSchool = async () => {
                 try {
-                  await addDoc(collection(db, "schools"), {
+
+                   const docRef = doc(db, "schools", `${docId}`);
+                  await updateDoc(docRef, {
                     schoolName,
                     email,
                     phoneNumber,
@@ -194,7 +252,6 @@ const CreateSchool: React.FunctionComponent = () => {
                     status,
                     country,
                     userID: user.uid,
-                    createdAt: new Date(),
                     modifiedAt: new Date(),
                   });
                   toggleShowSuccessMessage();
@@ -202,7 +259,7 @@ const CreateSchool: React.FunctionComponent = () => {
                   console.log(error);
                 }
               };
-              addSchool();
+              updateSchool();
             }
           }}
         />
@@ -210,5 +267,3 @@ const CreateSchool: React.FunctionComponent = () => {
     </Layout>
   );
 };
-
-export default CreateSchool;

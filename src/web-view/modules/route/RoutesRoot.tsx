@@ -4,12 +4,19 @@ import { Login } from '../auth';
 import GoBack from '../common/goback';
 import RequireAuth from './RequiredAuth';
 
-import {Classes, CreateSchool, Dashboard, School} from "../schools-management";
+import {
+  Classes,
+  CreateSchool,
+  Dashboard,
+  School,
+  EditSchool,
+} from "../schools-management";
 import ProfileSettings from '../profile-settings';
 import { CreateStaff, Roles, Staff } from '../school-administrator';
 import UserContextProvider from '../../../context/auth/userContext';
 import { SchoolDashboard } from '../school-management';
 import Sessions from '../schools-management/sessions/Sessions';
+
 
 const RoutesRoot: React.FunctionComponent = () => {
     return (
@@ -70,6 +77,14 @@ const RoutesRoot: React.FunctionComponent = () => {
               element={
                 <RequireAuth>
                   <CreateSchool />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="schools-management/school/edit/:docId"
+              element={
+                <RequireAuth>
+                  <EditSchool />
                 </RequireAuth>
               }
             />
